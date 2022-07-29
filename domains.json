@@ -123,6 +123,7 @@
   "subscriptions.do",
   "success.do",
   "swr.do",
+  "tenant.do",
   "tests.do",
   "texts.do",
   "timer.do",
