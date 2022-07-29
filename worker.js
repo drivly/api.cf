@@ -2,6 +2,7 @@ import domains from './domains.json'
 
 export default {
   scheduled: async (event, env, ctx) => {
+    // TODO
     // loop through the domains, and ensure they are properly configured
     // if the zone doesn't exist, create it
     // if the @ doesn't have a CNAME to drivly.github.io, create it
