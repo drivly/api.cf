@@ -1,6 +1,11 @@
 import domains from './domains.json'
 
 export default {
+  fetch: (event, env, ctx) => {
+    // TODO
+    // Login & Authorize via the Cloudflare Tenant API
+    // https://developers.cloudflare.com/tenant/get-started/prerequisites/
+  }
   scheduled: async (event, env, ctx) => {
     // TODO
     // loop through the domains, and ensure they are properly configured
