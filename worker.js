@@ -38,7 +38,6 @@ export default {
 
 
 // import domains from './domains.json'
-
 // export default {
 //   fetch: (event, env, ctx) => {
 //     // TODO
