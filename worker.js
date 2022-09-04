@@ -50,6 +50,7 @@ router.get('/intel', withParams, async ({user},{account, CF_TOKEN}) => {
 })
 
 router.get('/zones', withParams, async ({ user, url},{account, CF_TOKEN}) => {
+  const { searchParams } = new URL(url)
   const page = searchParams.get('page') ?? 1
   const data = await fetch(`https://api.cloudflare.com/client/v4/zones?page=${page}&account.id=${account}`, { headers: { Authorization: 'Bearer ' + CF_TOKEN }}).then(res => res.json())
   const zones = data.result.map(({name}) => ({ name, url: 'https://' + name }))
