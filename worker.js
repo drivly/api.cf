@@ -26,8 +26,7 @@ router.all('*', async (req, env, ctx) => {
 router.get('/', ({cf, headers, user}) => json({ api, cf, headers: Object.fromEntries(headers), user }))
 
 router.get('/whois/:domain', withParams, async ({domain, user, searchParams},{account, CF_TOKEN}) => {
-  const page = searchParams.get('page') ?? 1
-  const data = await fetch(`https://api.cloudflare.com/client/v4/accounts/${account}/intel/whois?page${page}&domain=${domain}`, { headers: { Authorization: 'Bearer ' + CF_TOKEN }}).then(res => res.json())
+  const data = await fetch(`https://api.cloudflare.com/client/v4/accounts/${account}/intel/whois?domain=${domain}`, { headers: { Authorization: 'Bearer ' + CF_TOKEN }}).then(res => res.json())
   return json({api, domain, data, user })
 })
 
@@ -51,7 +50,8 @@ router.get('/intel', withParams, async ({user},{account, CF_TOKEN}) => {
 })
 
 router.get('/zones', withParams, async ({ user, url},{account, CF_TOKEN}) => {
-  const data = await fetch(`https://api.cloudflare.com/client/v4/zones?account.id=${account}`, { headers: { Authorization: 'Bearer ' + CF_TOKEN }}).then(res => res.json())
+  const page = searchParams.get('page') ?? 1
+  const data = await fetch(`https://api.cloudflare.com/client/v4/zones?page=${page}&account.id=${account}`, { headers: { Authorization: 'Bearer ' + CF_TOKEN }}).then(res => res.json())
   const zones = data.result.map(({name}) => ({ name, url: 'https://' + name }))
   const links = {
     self:  url,
