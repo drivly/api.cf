@@ -1,6 +1,5 @@
 import { Router } from 'itty-router'
 import { json, withParams } from 'itty-router-extras'
-import wtf from 'wtf_wikipedia'
 import camelcaseKeys from 'camelcase-keys'
 
 const router = Router()
@@ -20,10 +19,12 @@ const api = {
   repo: 'https://github.com/drivly/api.cf',
 }
 
-// router.any('*', async (req, env, ctx) => {
-//   const {user} = await env.CTX.fetch(req).then(res => res.json())
-//   req.user = user
-// })
+router.any('*', async (req, env, ctx) => {
+  const {user} = await env.CTX.fetch(req).then(res => res.json())
+  req.user = user
+})
+
+router.get('/', (req) => json({api, req})
 
 router.get('/:id', withParams, async (req, env) => {
   const {id} = req
