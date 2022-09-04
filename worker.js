@@ -46,7 +46,7 @@ router.get('/asn/:asn', withParams, async ({asn, user},{account, CF_TOKEN}) => {
 
 router.get('/zones', withParams, async ({asn, user},{account, CF_TOKEN}) => {
   const data = await fetch(`https://api.cloudflare.com/client/v4/zones?account.id=${account}`, { headers: { Authorization: 'Bearer ' + CF_TOKEN }}).then(res => res.json())
-  return json({api, asn, data, user })
+  return json({api, asn, data: camelcaseKeys(data.result, {deep:true}), user })
 })
 
 router.get('/:resource/:id?', withParams, async ({resource, id, user}) => {
