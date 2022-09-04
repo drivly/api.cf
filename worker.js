@@ -19,7 +19,7 @@ const api = {
   repo: 'https://github.com/drivly/api.cf',
 }
 
-router.any('*', async (req, env, ctx) => {
+router.all('*', async (req, env, ctx) => {
   const {user} = await env.CTX.fetch(req).then(res => res.json())
   req.user = user
 })
