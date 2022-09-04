@@ -11,9 +11,8 @@ const api = {
   url: 'https://api.cf',
   api: 'https://api.cf/api',
   endpoints: {
-    ip: 'https://api.cf/ip/:ip',
-    asn: 'https://api.cf/ip/:asn',
-    domain: 'https://api.cf/ip/:domain',
+    cf: 'https://api.cf',
+    zones: 'https://api.cf/zones',
   },
   type: 'https://apis.do/integrations',
   repo: 'https://github.com/drivly/api.cf',
