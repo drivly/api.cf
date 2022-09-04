@@ -58,7 +58,7 @@ router.get('/zones', withParams, async ({ user, url},{account, CF_TOKEN}) => {
     self:  url,
     first: 'https://api.cf/zones?page=1',
     prev: page > 1 ? 'https://api.cf/zones?page=' + (page + 1) : undefined,
-    next: 'https://api.cf/zones?page=' + (page + 1),
+    next: 'https://api.cf/zones?page=' + (parseInt(page) + 1),
   }
   return json({api, links, zones, user })
 })
