@@ -21,10 +21,10 @@ const api = {
 
 router.all('*', async (req, env, ctx) => {
   const {user} = await env.CTX.fetch(req).then(res => res.json())
-  req.user = user
+  env.user = user
 })
 
-router.get('/', (req) => json({api, req}))
+router.get('/', (req, {user}) => json({ api, cf: req.cf, user }))
 
 router.get('/:id', withParams, async (req, env) => {
   const {id} = req
