@@ -27,15 +27,22 @@ router.all('*', async (req, env, ctx) => {
 router.get('/', ({cf, headers, user}) => json({ api, cf, headers: Object.fromEntries(headers), user }))
 
 router.get('/whois/:domain', withParams, async ({domain, user},{account, CF_TOKEN}) => {
-  const data = await fetch(`https://api.cloudflare.com/client/v4/accounts/${account}/intel/whois?domain=${domain}`, { headers: { authorization: 'Bearer ' + CF_TOKEN }}).then(res => res.json())
+  const data = await fetch(`https://api.cloudflare.com/client/v4/accounts/${account}/intel/whois?domain=${domain}`, { headers: { Authorization: 'Bearer ' + CF_TOKEN }}).then(res => res.json())
   return json({api, domain, data, user })
 })
 
 
 router.get('/ip/:ipv4', withParams, async ({ipv4, user},{account, CF_TOKEN}) => {
-  const data = await fetch(`https://api.cloudflare.com/client/v4/accounts/${account}/intel/ip?ipv4=${ipv4}`, { headers: { authorization: 'Bearer ' + CF_TOKEN }}).then(res => res.json())
-  return json({api, domain, data, user })
+  const data = await fetch(`https://api.cloudflare.com/client/v4/accounts/${account}/intel/ip?ipv4=${ipv4}`, { headers: { Authorization: 'Bearer ' + CF_TOKEN }}).then(res => res.json())
+  return json({api, ipv4, data, user })
 })
+
+
+router.get('/asn/:asn', withParams, async ({asn, user},{account, CF_TOKEN}) => {
+  const data = await fetch(`https://api.cloudflare.com/client/v4/accounts/${account}/intel/asn/${asn}`, { headers: { Authorization: 'Bearer ' + CF_TOKEN }}).then(res => res.json())
+  return json({api, asn, data, user })
+})
+
 
 router.get('/:resource/:id?', withParams, async ({resource, id, user}) => {
   return json({api, resource, id, user })
