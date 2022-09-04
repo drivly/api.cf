@@ -24,7 +24,7 @@ router.any('*', async (req, env, ctx) => {
   req.user = user
 })
 
-router.get('/', (req) => json({api, req})
+router.get('/', (req) => json({api, req}))
 
 router.get('/:id', withParams, async (req, env) => {
   const {id} = req
