@@ -26,10 +26,9 @@ router.all('*', async (req, env, ctx) => {
 
 router.get('/', (req, {user}) => json({ api, cf: req.cf, headers: Object.fromEntries(req.headers), user }))
 
-router.get('/:id', withParams, async (req, env) => {
+router.get('/:id', withParams, async (req, {user}) => {
   const {id} = req
-  const {user} = await env.CTX.fetch(req).then(res => res.json())
-  return json({api, user })
+  return json({api, id, user })
 })
 
 export default {
