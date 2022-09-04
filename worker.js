@@ -42,7 +42,13 @@ router.get('/asn/:asn', withParams, async ({asn, user},{account, CF_TOKEN}) => {
   const data = await fetch(`https://api.cloudflare.com/client/v4/accounts/${account}/intel/asn/${asn}`, { headers: { Authorization: 'Bearer ' + CF_TOKEN }}).then(res => res.json())
   return json({api, asn, data, user })
 })
+///intel/ip-list
 
+
+router.get('/intel', withParams, async ({user},{account, CF_TOKEN}) => {
+  const data = await fetch(`https://api.cloudflare.com/client/v4/accounts/${account}/intel/ip-list`, { headers: { Authorization: 'Bearer ' + CF_TOKEN }}).then(res => res.json())
+  return json({api, data, user })
+})
 
 router.get('/zones', withParams, async ({asn, user},{account, CF_TOKEN}) => {
   const data = await fetch(`https://api.cloudflare.com/client/v4/zones?account.id=${account}`, { headers: { Authorization: 'Bearer ' + CF_TOKEN }}).then(res => res.json())
