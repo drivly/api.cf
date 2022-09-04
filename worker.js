@@ -26,7 +26,7 @@ router.all('*', async (req, env, ctx) => {
 
 router.get('/', (req) => json({ api, cf: req.cf, headers: Object.fromEntries(req.headers), user: req.user }))
 
-router.get('/:method/:id?', withParams, async ({method, id, user}) => {
+router.get('/:resource/:id?', withParams, async ({resource, id, user}) => {
   return json({api, method, id, user })
 })
 
