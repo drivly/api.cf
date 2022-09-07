@@ -31,6 +31,12 @@ router.get('/whois/:domain', withParams, async ({domain, user, searchParams},{ac
 })
 
 
+router.get('/trace/:domain', withParams, async ({domain, user, searchParams},{account, CF_TOKEN}) => {
+  const data = await fetch(`https://api.cloudflare.com/client/v4/accounts/${account}/diagnostics/traceroute`, { method: 'post', body: JSON.stringify([domain]), headers: { Authorization: 'Bearer ' + CF_TOKEN }}).then(res => res.json())
+  return json({api, domain, data, user })
+})
+
+
 router.get('/ip/:ipv4', withParams, async ({ipv4, user},{account, CF_TOKEN}) => {
   const data = await fetch(`https://api.cloudflare.com/client/v4/accounts/${account}/intel/ip?ipv4=${ipv4}`, { headers: { Authorization: 'Bearer ' + CF_TOKEN }}).then(res => res.json())
   return json({api, ipv4, data, user })
