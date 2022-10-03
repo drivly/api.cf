@@ -18,7 +18,7 @@ const api = {
 }
 
 router.all('*', async (req, env) => {
-  const [ searchParams ] = new URL(req.url)
+  const { searchParams } = new URL(req.url)
   if (!searchParams.has('test')) {
     const { user } = await env.CTX.fetch(req).then(res => res.json())
     req.user = user
