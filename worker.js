@@ -18,8 +18,11 @@ const api = {
 }
 
 router.all('*', async (req, env) => {
-  const { user } = await env.CTX.fetch(req).then(res => res.json())
-  req.user = user
+  const [ searchParams ] = new URL(req.url)
+  if (!searchParams.has('test')) {
+    const { user } = await env.CTX.fetch(req).then(res => res.json())
+    req.user = user
+  }
 })
 
 router.get('/', ({ cf, headers, user }) => json({ api, cf, headers: Object.fromEntries(headers), user }))
