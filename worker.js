@@ -57,7 +57,7 @@ router.get('/intel', withParams, async ({ user }, { account, CF_TOKEN }) => {
   return json({ api, data, user })
 })
 
-router.get('/zones', withParams, async ({ user, url }, { account, CF_TOKEN }) => {
+router.get('/zones', withParams, async ({ user, url }, { account = 'b6641681fe423910342b9ffa1364c76d', CF_TOKEN }) => {
   const { searchParams } = new URL(url)
   const limit = 50
   const page = parseInt(searchParams.get('page') ?? 1)
