@@ -11,7 +11,7 @@ const api = {
   api: 'https://api.cf/api',
   endpoints: {
     cf: 'https://api.cf',
-    zones: 'https://api.cf/zones',
+//     zones: 'https://api.cf/zones',
   },
   type: 'https://apis.do/integrations',
   repo: 'https://github.com/drivly/api.cf',
