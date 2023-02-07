@@ -59,7 +59,7 @@ router.get('/intel', withParams, async ({ user }, { account, CF_TOKEN }) => {
 
 router.get('/zones', withParams, async ({ user, url }, { account = 'b6641681fe423910342b9ffa1364c76d', CF_TOKEN }) => {
   const { searchParams } = new URL(url)
-  const limit = 50
+  const limit = 500
   const page = parseInt(searchParams.get('page') ?? 1)
   const data = await fetch(`https://api.cloudflare.com/client/v4/zones?per_page=${limit}&page=${page}&account.id=${account}`, { headers: { Authorization: 'Bearer ' + CF_TOKEN } }).then(res => res.json())
 //   const data = await fetch(`https://api.cloudflare.com/client/v4/zones?per_page=${limit}&page=${page}`, { headers: { Authorization: 'Bearer ' + CF_TOKEN } }).then(res => res.json())
