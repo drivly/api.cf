@@ -61,7 +61,8 @@ router.get('/zones', withParams, async ({ user, url }, { account, CF_TOKEN }) =>
   const { searchParams } = new URL(url)
   const limit = 50
   const page = parseInt(searchParams.get('page') ?? 1)
-  const data = await fetch(`https://api.cloudflare.com/client/v4/zones?per_page=${limit}&page=${page}&account.id=${account}`, { headers: { Authorization: 'Bearer ' + CF_TOKEN } }).then(res => res.json())
+//   const data = await fetch(`https://api.cloudflare.com/client/v4/zones?per_page=${limit}&page=${page}&account.id=${account}`, { headers: { Authorization: 'Bearer ' + CF_TOKEN } }).then(res => res.json())
+  const data = await fetch(`https://api.cloudflare.com/client/v4/zones?per_page=${limit}&page=${page}`, { headers: { Authorization: 'Bearer ' + CF_TOKEN } }).then(res => res.json())
   const zones = data.result.map(({ name, id }) => ({ id, name, url: 'https://' + name }))
   const links = {
     self: url,
